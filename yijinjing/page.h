@@ -33,6 +33,7 @@ public:
     bool is_full() const { return last_frame_address() + reinterpret_cast<FrameHeader*>(last_frame_address())->length > address_border(); }
 
     static PagePtr load(LocationPtr location, uint32_t dest_id, int page_id, bool is_writing);
+    static uint32_t get_page_size(LocationPtr location);
     static std::string get_page_path(LocationPtr location, uint32_t dest_id, int id);
     static int find_page_id(LocationPtr location, uint32_t dest_id, int64_t time);
 

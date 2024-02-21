@@ -25,7 +25,7 @@ struct Order {
 int N = 1000000;
 
 int main() {
-    auto home = std::make_shared<Location>(".");
+    auto home = std::make_shared<Location>(".", Category::STRATEGY);
 
     Publisher publisher(home);
     auto writer = publisher.get_writer(0);

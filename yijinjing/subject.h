@@ -27,7 +27,7 @@ public:
     }
 
     // true=new created, false=existed
-    bool write_to(uint32_t dest_id) {
+    bool require_write_to(uint32_t dest_id) {
         auto it = writers_.find(dest_id);
         if (it != writers_.end()) return false;
         writers_[dest_id] = std::make_shared<Writer>(location_, dest_id);
@@ -49,7 +49,7 @@ public:
 
     auto& get_dispatcher() const { return dispatcher_; }
 
-    void observe(LocationPtr location, uint32_t dest_id, int64_t from_time) {
+    void require_read_from(LocationPtr location, uint32_t dest_id, int64_t from_time) {
         reader_->join(location, dest_id, from_time);
     }
 

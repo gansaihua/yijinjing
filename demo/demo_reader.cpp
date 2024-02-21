@@ -5,7 +5,7 @@
 using namespace yijinjing;
 
 int main() {
-    auto home = std::make_shared<Location>(".");
+    auto home = std::make_shared<Location>("./aaa", Category::STRATEGY);
     auto reader = std::make_shared<Reader>();
     reader->join(home, 20231229, 0);
 

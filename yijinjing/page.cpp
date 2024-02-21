@@ -40,10 +40,8 @@ void Page::set_last_frame_position(uint64_t position) {
 }
 
 PagePtr Page::load(LocationPtr location, uint32_t dest_id, int page_id, bool is_writing) {
-    uint32_t page_size = location->journal_page_size;
+    uint32_t page_size = get_page_size(location);
     std::string path = get_page_path(location, dest_id, page_id);
-    bool new_created = ensure_file_exists(path, page_size);
-
     uintptr_t address = load_mmap_buffer(path, page_size, is_writing);
     if (address < 0) throw yijinjing_error("unable to load page for " + path);
 
@@ -59,6 +57,11 @@ PagePtr Page::load(LocationPtr location, uint32_t dest_id, int page_id, bool is_
     if (header->page_size != page_size) throw yijinjing_error(fmt::format("page size mismatch, required {}, found {}", page_size, +header->page_size));
 
     return std::shared_ptr<Page>(new Page(location, dest_id, page_id, page_size, address));
+}
+
+uint32_t Page::get_page_size(LocationPtr location) {
+    if (location->category == Category::MD) return std::numeric_limits<uint32_t>::max() - 1;
+    return 128 * 1024 * 1024;
 }
 
 std::string Page::get_page_path(LocationPtr location, uint32_t dest_id, int id) {

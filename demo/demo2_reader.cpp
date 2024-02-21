@@ -23,10 +23,10 @@ struct Order {
 };
 
 int main() {
-    auto home = std::make_shared<Location>(".");
+    auto home = std::make_shared<Location>(".", Category::STRATEGY);
 
     Observer observer;
-    observer.observe(home, 0, 0);
+    observer.require_read_from(home, 0, 0);
 
     observer.subscribe(MTQuote, [](const EventPtr& e) {
         auto& data = e->data<Quote>();

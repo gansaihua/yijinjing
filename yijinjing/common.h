@@ -4,6 +4,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <filesystem>
 #include <limits>
 #include <memory>
 #include <stdexcept>
@@ -195,14 +196,22 @@ public:
 
 FORWARD_DECLARE_PTR(Location)
 
+enum class Category {
+    TD,
+    MD,
+    STRATEGY
+};
+
 class Location {
 public:
-    Location(const std::string &path, uint32_t journal_page_size = std::numeric_limits<uint32_t>::max()) : path(path), journal_page_size(journal_page_size), uid(murmurhash(path.c_str(), path.size(), 6666)) {}
+    Location(const std::string &path, Category category)
+        : path(path), category(category), uid(murmurhash(path.c_str(), path.size(), 6666)) {
+        if (!std::filesystem::exists(path)) std::filesystem::create_directories(path);
+    }
 
     const std::string path;
+    Category category;  // 路径类型标识
     const uint32_t uid;
-
-    const uint32_t journal_page_size;  // 生成journal单个page的文件大小, in bytes
 };
 
 class Event {

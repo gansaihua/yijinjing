@@ -21,7 +21,7 @@ struct Order {
 };
 
 int main() {
-    auto home = std::make_shared<Location>(".");
+    auto home = std::make_shared<Location>("./aaa", Category::STRATEGY);
     auto writer = std::make_shared<Writer>(home, 20231229);
 
     Quote q;

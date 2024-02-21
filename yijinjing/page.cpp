@@ -42,11 +42,12 @@ void Page::set_last_frame_position(uint64_t position) {
 PagePtr Page::load(LocationPtr location, uint32_t dest_id, int page_id, bool is_writing) {
     uint32_t page_size = location->journal_page_size;
     std::string path = get_page_path(location, dest_id, page_id);
+    bool new_created = ensure_file_exists(path, page_size);
+
     uintptr_t address = load_mmap_buffer(path, page_size, is_writing);
     if (address < 0) throw yijinjing_error("unable to load page for " + path);
 
     auto header = reinterpret_cast<PageHeader *>(address);
-
     if (header->last_frame_position == 0) {
         header->page_header_length = sizeof(PageHeader);
         header->page_size = page_size;

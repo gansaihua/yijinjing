@@ -1,8 +1,7 @@
 #include <chrono>
 #include <iostream>
 
-#include "msg.h"
-#include "writer.h"
+#include "subject.h"
 
 using namespace yijinjing;
 
@@ -27,7 +26,9 @@ int N = 1000000;
 
 int main() {
     auto home = std::make_shared<Location>(".");
-    auto writer = std::make_shared<Writer>(home, 0);
+
+    Publisher publisher(home);
+    auto writer = publisher.get_writer(0);
 
     auto start = std::chrono::steady_clock::now();
 

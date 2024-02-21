@@ -22,7 +22,7 @@ struct Order {
 
 int main() {
     auto home = std::make_shared<Location>(".");
-    auto writer = std::make_shared<Writer>(home, 20240221);
+    auto writer = std::make_shared<Writer>(home, 20231229);
 
     Quote q;
     strcpy(q.symbol, "ag2212");

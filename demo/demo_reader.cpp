@@ -7,7 +7,7 @@ using namespace yijinjing;
 int main() {
     auto home = std::make_shared<Location>(".");
     auto reader = std::make_shared<Reader>();
-    reader->join(home, 20240221, 0);
+    reader->join(home, 20231229, 0);
 
     while (reader->data_available()) {
         auto frame = reader->current_frame();

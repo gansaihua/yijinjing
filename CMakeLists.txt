@@ -10,8 +10,5 @@ if(NOT CMAKE_BUILD_TYPE)
 endif()
 message(STATUS "Build type set to ${CMAKE_BUILD_TYPE}")
 
-find_package(fmt)
-link_libraries(fmt::fmt)
-
 add_subdirectory(yijinjing)
 add_subdirectory(demo)

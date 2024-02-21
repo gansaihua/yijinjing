@@ -7,11 +7,23 @@
 #include <sys/types.h>
 #include <unistd.h>
 
+#include <fstream>
 #include <regex>
 
 #include "common.h"
 
 namespace yijinjing {
+
+bool ensure_file_exists(const std::string &path, size_t size) {
+    std::fstream fs(path, std::ios::in);
+    if (!fs.is_open()) {
+        fs.open(path, std::ios::out);
+        fs.seekp(size - 1, std::ios::beg);
+        fs.write("", 1);
+        return true;
+    }
+    return false;
+}
 
 uintptr_t load_mmap_buffer(const std::string &path, size_t size, bool is_writing) {
     int fd = open(path.c_str(), is_writing ? O_RDWR | O_CREAT : O_RDONLY, (mode_t)0600);

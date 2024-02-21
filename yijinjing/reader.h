@@ -6,7 +6,7 @@ namespace yijinjing {
 
 class Reader {
 public:
-    explicit Reader(bool lazy);
+    explicit Reader();
 
     ~Reader();
 
@@ -33,8 +33,6 @@ public:
     void sort();
 
 private:
-    const bool lazy_;
-
     Journal *current_;
 
     std::vector<JournalPtr> journals_;

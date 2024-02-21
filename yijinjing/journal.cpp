@@ -5,11 +5,10 @@
 
 namespace yijinjing {
 
-Journal::Journal(LocationPtr location, uint32_t dest_id, bool is_writing, bool lazy)
+Journal::Journal(LocationPtr location, uint32_t dest_id, bool is_writing)
     : location_(std::move(location)),
       dest_id_(dest_id),
       is_writing_(is_writing),
-      lazy_(lazy),
       frame_(std::shared_ptr<Frame>(new Frame())),
       page_frame_nb_(0) {}
 
@@ -37,7 +36,7 @@ void Journal::seek_to_time(int64_t nanotime) {
 
 void Journal::load_page(int page_id) {
     if (!current_page_ || current_page_->get_page_id() != page_id) {
-        current_page_ = Page::load(location_, dest_id_, page_id, is_writing_, lazy_);
+        current_page_ = Page::load(location_, dest_id_, page_id, is_writing_);
         frame_->set_address(current_page_->first_frame_address());
         page_frame_nb_ = 0;
     }

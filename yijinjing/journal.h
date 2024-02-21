@@ -13,7 +13,7 @@ namespace yijinjing {
 // the abstraction of continuous memory access
 class Journal {
 public:
-    Journal(LocationPtr location, uint32_t dest_id, bool is_writing, bool lazy);
+    Journal(LocationPtr location, uint32_t dest_id, bool is_writing);
 
     ~Journal();
 
@@ -38,7 +38,6 @@ private:
     const uint32_t dest_id_;
 
     const bool is_writing_;
-    const bool lazy_;
 
     PagePtr current_page_;
     FramePtr frame_;

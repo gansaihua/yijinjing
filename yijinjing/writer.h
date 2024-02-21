@@ -6,7 +6,7 @@ namespace yijinjing {
 
 class Writer {
 public:
-    Writer(LocationPtr location, uint32_t dest_id, bool lazy);
+    Writer(LocationPtr location, uint32_t dest_id);
 
     LocationPtr get_location() const { return journal_->location_; }
     uint32_t get_dest() const { return journal_->dest_id_; }

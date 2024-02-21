@@ -32,12 +32,12 @@ public:
 
     bool is_full() const { return last_frame_address() + reinterpret_cast<FrameHeader*>(last_frame_address())->length > address_border(); }
 
-    static PagePtr load(LocationPtr location, uint32_t dest_id, int page_id, bool is_writing, bool lazy);
+    static PagePtr load(LocationPtr location, uint32_t dest_id, int page_id, bool is_writing);
     static std::string get_page_path(LocationPtr location, uint32_t dest_id, int id);
     static int find_page_id(LocationPtr location, uint32_t dest_id, int64_t time);
 
 private:
-    Page(LocationPtr location, uint32_t dest_id, int page_id, size_t size, bool lazy, uintptr_t address);
+    Page(LocationPtr location, uint32_t dest_id, int page_id, size_t size, uintptr_t address);
 
     // update page header when new frame added
     void set_last_frame_position(uint64_t position);
@@ -45,7 +45,6 @@ private:
     const LocationPtr location_;
     const uint32_t dest_id_;
     const int page_id_;
-    const bool lazy_;
     const size_t size_;
     const PageHeader* header_;
 

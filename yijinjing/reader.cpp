@@ -6,7 +6,7 @@
 
 namespace yijinjing {
 
-Reader::Reader(bool lazy) : lazy_(lazy), current_(nullptr) {}
+Reader::Reader() : current_(nullptr) {}
 
 Reader::~Reader() { journals_.clear(); }
 
@@ -14,7 +14,7 @@ void Reader::join(LocationPtr location, uint32_t dest_id, const int64_t from_tim
     for (const auto &journal : journals_) {
         if (journal->location_->uid == location->uid && journal->dest_id_ == dest_id) return;
     }
-    journals_.push_back(std::make_shared<Journal>(location, dest_id, false, lazy_));
+    journals_.push_back(std::make_shared<Journal>(location, dest_id, false));
     journals_.back()->seek_to_time(from_time);
 
     // do not sort if current_ is set (because we could be in process of reading)

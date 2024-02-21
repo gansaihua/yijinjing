@@ -4,8 +4,8 @@
 
 namespace yijinjing {
 
-uintptr_t load_mmap_buffer(const std::string &path, size_t size, bool is_writing = false, bool lazy = true);
+uintptr_t load_mmap_buffer(const std::string &path, size_t size, bool is_writing = false);
 
-bool release_mmap_buffer(uintptr_t address, size_t size, bool lazy);
+bool release_mmap_buffer(uintptr_t address, size_t size);
 
 }  // namespace yijinjing

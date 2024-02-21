@@ -23,10 +23,8 @@ struct Order {
 
 int main() {
     auto home = std::make_shared<Location>(".");
-    auto reader = std::make_shared<Reader>(false);
+    auto reader = std::make_shared<Reader>();
     reader->join(home, 20240221, 0);
-
-    std::this_thread::sleep_for(std::chrono::seconds(2));
 
     while (reader->data_available()) {
         auto frame = reader->current_frame();

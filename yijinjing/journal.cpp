@@ -1,9 +1,11 @@
 #include "journal.h"
 
+#include <cassert>
+
 #include "common.h"
 #include "page.h"
 
-namespace yijinjing {
+namespace kungfu {
 
 Journal::Journal(LocationPtr location, uint32_t dest_id, bool is_writing)
     : location_(std::move(location)),
@@ -45,4 +47,4 @@ void Journal::load_page(int page_id) {
 void Journal::load_next_page() {
     load_page(current_page_->get_page_id() + 1);
 }
-}  // namespace yijinjing
+}  // namespace kungfu

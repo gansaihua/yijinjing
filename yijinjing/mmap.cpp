@@ -12,7 +12,7 @@
 
 #include "common.h"
 
-namespace yijinjing {
+namespace kungfu {
 
 bool ensure_file_exists(const std::string &path, size_t size) {
     std::fstream fs(path, std::ios::in);
@@ -65,4 +65,4 @@ bool release_mmap_buffer(uintptr_t address, size_t size) {
     return true;
 }
 
-}  // namespace yijinjing
+}  // namespace kungfu

@@ -1,12 +1,14 @@
 #pragma once
 
 #include <cstdint>
+#include <cstring>
 #include <string>
 
 #include "common.h"
 
-namespace yijinjing {
+namespace kungfu {
 
+FORWARD_DECLARE_PTR(Location)
 FORWARD_DECLARE_PTR(Frame)
 FORWARD_DECLARE_PTR(Page)
 FORWARD_DECLARE_PTR(Reader)
@@ -35,6 +37,9 @@ public:
     int32_t msg_type() const override { return header_->msg_type; }
     uint32_t source() const override { return header_->source; }
     uint32_t dest() const override { return header_->dest; }
+    const char *data_as_bytes() const override { return reinterpret_cast<char *>(address() + header_length()); }
+    const std::string data_as_string() const override { return std::string(data_as_bytes()); }
+    const std::string to_string() const override { return std::string(reinterpret_cast<char *>(address())); }
 
     template <typename T>
     size_t copy_data(const T &data) {
@@ -63,4 +68,4 @@ private:
     friend class Writer;
 };
 
-}  // namespace yijinjing
+}  // namespace kungfu

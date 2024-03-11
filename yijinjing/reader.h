@@ -1,8 +1,10 @@
 #pragma once
 
+#include <vector>
+
 #include "journal.h"
 
-namespace yijinjing {
+namespace kungfu {
 
 class Reader {
 public:
@@ -38,4 +40,4 @@ private:
     std::vector<JournalPtr> journals_;
 };
 
-}  // namespace yijinjing
+}  // namespace kungfu

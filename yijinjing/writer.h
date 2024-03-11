@@ -1,8 +1,10 @@
 #pragma once
 
+#include <cassert>
+
 #include "journal.h"
 
-namespace yijinjing {
+namespace kungfu {
 
 class Writer {
 public:
@@ -67,4 +69,4 @@ private:
     size_t size_to_write_;
 };
 
-}  // namespace yijinjing
+}  // namespace kungfu

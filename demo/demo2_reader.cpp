@@ -3,7 +3,7 @@
 
 #include "subject.h"
 
-using namespace yijinjing;
+using namespace kungfu;
 
 enum {
     MTQuote = 101,

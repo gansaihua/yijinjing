@@ -1,7 +1,6 @@
-#include "msg.h"
 #include "writer.h"
 
-using namespace yijinjing;
+using namespace kungfu;
 
 enum {
     MTQuote = 101,
@@ -21,7 +20,7 @@ struct Order {
 };
 
 int main() {
-    auto home = std::make_shared<Location>("./aaa", Category::STRATEGY);
+    auto home = std::make_shared<Location>(".", Category::STRATEGY);
     auto writer = std::make_shared<Writer>(home, 20231229);
 
     Quote q;

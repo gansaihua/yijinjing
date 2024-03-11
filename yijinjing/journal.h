@@ -5,10 +5,9 @@
 
 #include "common.h"
 #include "frame.h"
-#include "msg.h"
 #include "page.h"
 
-namespace yijinjing {
+namespace kungfu {
 
 // the abstraction of continuous memory access
 class Journal {
@@ -47,4 +46,4 @@ private:
     friend class Writer;
 };
 
-}  // namespace yijinjing
+}  // namespace kungfu

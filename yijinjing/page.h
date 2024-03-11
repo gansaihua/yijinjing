@@ -3,7 +3,26 @@
 #include "common.h"
 #include "frame.h"
 
-namespace yijinjing {
+namespace kungfu {
+
+enum {
+    MTPageEnd = 10000
+};
+
+enum class Category {
+    TD,
+    MD,
+    STRATEGY
+};
+
+class Location {
+public:
+    Location(const std::string& path, Category category);
+
+    const uint32_t uid;
+    const std::string path;
+    Category category;  // 路径类型标识
+};
 
 struct PageHeader {
     uint32_t page_header_length;
@@ -54,4 +73,4 @@ private:
     friend class Reader;
 };
 
-}  // namespace yijinjing
+}  // namespace kungfu

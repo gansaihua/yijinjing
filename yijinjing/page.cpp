@@ -2,13 +2,18 @@
 
 #include <fmt/format.h>
 
+#include <cassert>
 #include <filesystem>
 #include <regex>
 #include <utility>
 
 #include "mmap.h"
+#include "utils.h"
 
-namespace yijinjing {
+namespace kungfu {
+
+Location::Location(const std::string &path, Category category)
+    : path(path), category(category), uid(hash_str_32(path.c_str(), path.size(), 6666)) {}
 
 std::vector<int> list_page_id(LocationPtr location, uint32_t dest_id) {
     std::vector<int> page_ids;
@@ -81,4 +86,4 @@ int Page::find_page_id(LocationPtr location, uint32_t dest_id, int64_t time) {
     return page_ids.front();
 }
 
-}  // namespace yijinjing
+}  // namespace kungfu

@@ -4,13 +4,14 @@
 #include <utility>
 
 #include "common.h"
+#include "nano_time.h"
 
-namespace yijinjing {
+namespace kungfu {
 
 constexpr uint32_t PAGE_ID_TRANC = 0xFFFF0000;
 constexpr uint32_t FRAME_ID_TRANC = 0x0000FFFF;
 
-Writer::Writer(LocationPtr location, uint32_t dest_id) : size_to_write_(0) {
+Writer::Writer(LocationPtr location, uint32_t dest_id) : size_to_write_(0), writer_mtx_() {
     frame_id_base_ = location->uid ^ dest_id;
     frame_id_base_ = frame_id_base_ << 32;
     journal_ = std::make_shared<Journal>(location, dest_id, true);
@@ -106,4 +107,4 @@ void Writer::close_page() {
     last_page->set_last_frame_position(last_page_frame.address() - last_page->address());
 }
 
-}  // namespace yijinjing
+}  // namespace kungfu

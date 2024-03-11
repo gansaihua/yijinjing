@@ -1,11 +1,13 @@
 #include <iostream>
 
+#include "fmt/format.h"
+#include "nano_time.h"
 #include "reader.h"
 
-using namespace yijinjing;
+using namespace kungfu;
 
 int main() {
-    auto home = std::make_shared<Location>("./aaa", Category::STRATEGY);
+    auto home = std::make_shared<Location>(".", Category::STRATEGY);
     auto reader = std::make_shared<Reader>();
     reader->join(home, 20231229, 0);
 

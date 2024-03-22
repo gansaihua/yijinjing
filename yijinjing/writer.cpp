@@ -28,7 +28,7 @@ FramePtr Writer::open_frame(int32_t msg_type, uint32_t data_length) {
     assert(sizeof(FrameHeader) + data_length + sizeof(FrameHeader) <= journal_->current_page_->get_page_size());
     int64_t t = Time::now_in_nano();
     while (!writer_mtx_.try_lock()) {
-        if (Time::now_in_nano() - t > TimeUnit::NANOSECONDS_PER_MILLISECOND) throw yijinjing_error("Can not lock writer for " + journal_->location_->path);
+        if (Time::now_in_nano() - t > TimeUnit::NANOSECONDS_PER_SECOND) throw yijinjing_error("Can not lock writer for " + journal_->location_->path);
     }
     if (journal_->current_frame()->address() + sizeof(FrameHeader) + data_length > journal_->current_page_->address_border()) {
         close_page();
@@ -69,7 +69,7 @@ void Writer::mark_with_time(int64_t gen_time, int32_t msg_type) {
     frame->set_msg_type(msg_type);
     frame->set_source(journal_->location_->uid);
     frame->set_dest(journal_->dest_id_);
-    memset(reinterpret_cast<void *>(frame->address() + frame->header_length()), 0, sizeof(FrameHeader));
+    std::memset(reinterpret_cast<void *>(frame->address() + frame->header_length()), 0, sizeof(FrameHeader));
     frame->set_gen_time(gen_time);
     frame->set_data_length(0);
     journal_->current_page_->set_last_frame_position(frame->address() - journal_->current_page_->address());
